@@ -1,69 +1,50 @@
 import { useState } from "react"
 
-// const Hello = ({name, age}) => {
-//   const bornYear = () => {
-//     const yearNow = new Date().getFullYear()
-//     return yearNow - age
-//   }
-//   return (
-//     <div>
-//       <p>Hello {name}, you are {age} years old</p>
-//       <p>So you were born in {bornYear()} </p>
-//     </div>
-//   )
-// }
-
-const Display = ({count}) => <div>{count}</div>
-
-const Button = ({onClick, text}) =><button onClick={onClick}>{text}</button>
-
 const App = () => {
-  const [counter, setCounter] = useState(0)
-  // setTimeout(
-  //   () => setCounter(counter+1),
-  //   1000
+  // const [left, setLeft] = useState(0)
+  // const [right, setRight] = useState(0)
+  // return (
+  //   <div>
+  //     {left}
+  //     <button onClick={()=>setLeft(left+1)}>Left</button>
+  //     <button onClick={()=>setRight(right+1)}>Right</button>
+  //     {right}
+  //   </div>
   // )
-  console.log('rendering with counter value', counter)
-  const increaseByOne = () => {
-    console.log('increasing, value before', counter)
-    setCounter(counter+1)
-  }
-  const setToZero = () => {
-    console.log('resetting to zero, value before', counter)
-    setCounter(0)
-  }
-  const decreaseByOne = () => {
-    console.log('decreasing, value before', counter)
-    setCounter(counter-1)
-  }
-  
-  // const handleClick = () => {
-  //   console.log('clicked')
+  const [clicks, setClicks] = useState({
+    left:0, right:0
+  })
+
+  // const handleLeftClick = () => {
+  //   const newClicks = {
+  //     ...clicks,
+  //     left: clicks.left+1
+  //     // right: clicks.right
+  //   }
+  //   console.log(newClicks)
+  //   setClicks(newClicks)
   // }
+
+  // const handleRightClick = () => {
+  //   const newClicks = {
+  //     // left: clicks.left,
+  //     ...clicks,
+  //     right: clicks.right+1
+  //   }
+  //   console.log(newClicks)
+  //   setClicks(newClicks)
+  // }
+
+  const handleLeftClick = () => {setClicks({...clicks, left: clicks.left+1})}
+  const handleRightClick = () => {setClicks({...clicks, right: clicks.right+1})}
+
   return (
-    <>
-      {/* <div>{counter}</div> */}
-      {/* <button onClick={handleClick}> */}
-      {/* <button onClick={() => console.log('clicked')}> */}
-      <div>
-        <Display count={counter} />
-        <Button onClick={increaseByOne} text='plus'/>
-        <Button onClick={setToZero} text='zero' />
-        <Button onClick={decreaseByOne} text='minus' />
-      </div>
-    </>
-      /* <div>
-        <p>Hello world, it is {now.toString}</p>
-        <p>
-          {a} plus {b} is {a+b}
-        </p>
-        <Hello name={name} age={age}/>
-        <Hello name="Leo" age={21}/>
-      </div>
-      <div>
-        <p>{friends[0].name} {friends[0].age}</p>
-        <p>{friends[1].name} {friends[1].age}</p>
-      </div> */  
+    <div>
+      {clicks.left}
+      <button onClick={handleLeftClick}>Left</button>
+      <button onClick={handleRightClick}>Right</button>
+      {clicks.right}
+    </div>
   )
 }
 
