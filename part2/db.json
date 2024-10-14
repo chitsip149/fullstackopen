@@ -3,7 +3,7 @@
     {
       "id": "1",
       "content": "HTML is easy",
-      "important": true
+      "important": false
     },
     {
       "id": "2",
@@ -28,7 +28,7 @@
     {
       "id": "fb4d",
       "content": "hi",
-      "important": true
+      "important": false
     },
     {
       "id": "38da",
@@ -53,7 +53,7 @@
     {
       "id": "fc14",
       "content": "this is trang",
-      "important": true
+      "important": false
     },
     {
       "id": "244d",
@@ -78,6 +78,11 @@
     {
       "id": "8174",
       "content": "nguyen minh trang",
+      "important": false
+    },
+    {
+      "id": "a0ec",
+      "content": "hihihehe",
       "important": false
     }
   ]
