@@ -28,7 +28,7 @@
     {
       "id": "fb4d",
       "content": "hi",
-      "important": false
+      "important": true
     },
     {
       "id": "38da",
@@ -58,17 +58,17 @@
     {
       "id": "244d",
       "content": "hi",
-      "important": false
+      "important": true
     },
     {
       "id": "c134",
       "content": "hhehehehhe",
-      "important": true
+      "important": false
     },
     {
       "id": "24da",
       "content": "hehe",
-      "important": false
+      "important": true
     },
     {
       "id": "e41b",
@@ -83,6 +83,16 @@
     {
       "id": "a0ec",
       "content": "hihihehe",
+      "important": false
+    },
+    {
+      "id": "b047",
+      "content": "hi",
+      "important": false
+    },
+    {
+      "id": "2a17",
+      "content": "hello",
       "important": false
     }
   ]
