@@ -17,7 +17,7 @@ const App = () => {
       })
   }
   useEffect(hook, [])
-  
+
   console.log('render', notes.length, 'notes')
 
   const handleNoteChange = (event) => { //every time a change occurs in the input element, the event handler function receives the event object as its event parameter
@@ -31,10 +31,18 @@ const App = () => {
     const noteObject = {
       content: newNote,
       important: Math.random()<0.5,
-      id: String(notes.length+1),
+      // id: String(notes.length+1),
     }
-    setNotes(notes.concat(noteObject))
-    setNewNote('')
+    
+
+    //we omit the id since it's better to let the server generate ids for our resources
+    axios
+      .post('http://localhost:3001/notes', noteObject)
+      .then(response => {
+        console.log(response)
+        setNotes(notes.concat(noteObject))
+        setNewNote('')  
+      })
   }
 
   const noteToShow = showAll?notes:notes.filter(note => note.important)
