@@ -1,58 +1,51 @@
 import { useState } from 'react'
 import Note from './components/Note'
 
-const App = ({notes}) => {
-  const [newNum, setNewNum] = useState("")
-  const [newNotes, setNewNotes] = useState(notes)
-  const [sum, setSum] = useState(0)
+// const Note = ({note}) => {
+//   return (
+//     <li key={note.id}>{note.content}</li>
+//   )
+// }
 
-  const typeNewNum = (event) => {
+const App = (props) => {
+  const [notes, setNotes] = useState(props.notes)
+  const [newNote, setNewNote] = useState('')
+  const [showAll, setShowAll] = useState(true)
+
+  const handleNoteChange = (event) => { //every time a change occurs in the input element, the event handler function receives the event object as its event parameter
     console.log(event.target.value)
-    setNewNum((event.target.value).toString())
+    setNewNote(event.target.value)
   }
 
-  const isInteger = (value) => {
-    if (parseInt(value, 10).toString()===value) return true
-    return false
-  }
-
-  const clickButton = (event) => {
-    event.preventDefault()
-    console.log('click', event.target)
-    try {
-      if (isInteger(newNum)) {
-        console.log('this is a number')
-        const newNote = {
-          number: Number.parseInt(newNum),
-          id: newNotes.length+1
-        }
-        setSum(sum+newNote.number)
-        setNewNotes(newNotes.concat(newNote))
-        setNewNum('')
-      }
-      else {
-        throw new Error(`${newNum} is not a number`)
-      }
+  const addNotes = (event) => {
+    event.preventDefault() //the default action will make the page refresh
+    console.log('button clicked', event.target)
+    const noteObject = {
+      content: newNote,
+      important: Math.random()<0.5,
+      id: String(notes.length+1),
     }
-    catch (error){
-      console.error('catch exception', error)
-      alert('Please enter only number!')
-    }
+    setNotes(notes.concat(noteObject))
+    setNewNote('')
   }
 
+  const noteToShow = showAll?notes:notes.filter(note => note.important)
   return (
-    <>
-      <h1>This is a sum calculator</h1>
+    <div>
+      <h1>Notes</h1>
+      <div>
+        <button onClick={() => setShowAll(!showAll)}>
+          show {showAll?'important':'all'}
+        </button>
+      </div>
       <ul>
-        {newNotes.map(note => <li key={note.id}>{note.number}</li>)}
+        {noteToShow.map(note => <Note key={note.id} note={note} />)}
       </ul>
-      <div>Current sum: {sum}</div>
-      <form onSubmit={clickButton}>
-        <input value={newNum} placeholder='Enter a number...' onChange={typeNewNum} />
-        <button type='submit'>submit</button>
+      <form onSubmit={addNotes}>
+        <input value={newNote} onChange={handleNoteChange}/>
+        <button type="submit">save</button> 
       </form>
-
-    </>
+    </div>
   )
 }
 
