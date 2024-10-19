@@ -33,7 +33,7 @@
     {
       "id": "38da",
       "content": "hello",
-      "important": true
+      "important": false
     },
     {
       "id": "86f1",
@@ -48,12 +48,12 @@
     {
       "id": "815f",
       "content": "hello",
-      "important": true
+      "important": false
     },
     {
       "id": "fc14",
       "content": "this is trang",
-      "important": false
+      "important": true
     },
     {
       "id": "244d",
