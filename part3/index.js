@@ -1,5 +1,8 @@
 const express = require('express')
+const cors = require('cors')
 const app = express() //the express function creates an express application stored in the app variable
+
+app.use(cors())
 
 let notes = [
     {
@@ -23,6 +26,22 @@ let notes = [
 //express.json() is a built-in middleware function in express. it parses incoming requests with json payloads and is based on body-parser
 //returns middleware that only parses json and only looks at requests where the content-type header matches the type option
 app.use(express.json())
+
+// const requestLogger = (request, response, next) => {
+//     console.log('Method: ', request.method)
+//     console.log('Path: ', request.path)
+//     console.log('Body', request.body)
+//     console.log('---')
+//     next()
+// }
+
+// app.use(requestLogger)
+
+// const unkownEndpoint = (request, response) => {
+//     response.status(404).send({error: 'unkown endpoint'})
+// }
+
+// app.use(unkownEndpoint)
 
 app.get('/api/notes', (request, response) => {
     response.json(notes)
@@ -83,6 +102,6 @@ app.post('/api/notes', (request, response) => {
 })
 
 //bind the http server assigned to the app variable, to listen to http requests sent to port 3001
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
