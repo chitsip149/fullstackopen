@@ -50,6 +50,12 @@ app.delete('/api/notes/:id', (request, response) => {
     response.status(204).end()
 })
 
+const generateId = () => {
+    const maxId = notes.length>0 
+        ? Math.max(...notes.map(n=>Number(n.id)))
+        : 0
+    return String(maxId+1)
+}
 
 //adding a note happens by making an http post request to the address, and by sending all the info for the new note in the request body in json format
 //to access the data easily, we need the help of the express json-parser that we can use with the command app.use(express.json())
@@ -57,8 +63,22 @@ app.delete('/api/notes/:id', (request, response) => {
 //without the json-parser, the body property would be undefined
 //the json-parser takes the json data of a request, transforms it into a js object and then attaches it to the body property of the request object before the route handler is called
 app.post('/api/notes', (request, response) => {
-    const note = request.body
-    console.log(note)
+    const body = request.body
+
+    if (!body.content){
+        return response.status(400).json({
+            error: 'content missing'
+        })
+    }
+    const note = {
+        content: body.content,
+        important: Boolean(body.important) || false,
+        id: generateId()
+    }
+
+    notes = notes.concat(note)
+
+    console.log(notes)
     response.json(note)
 })
 
