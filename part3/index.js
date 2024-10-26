@@ -3,6 +3,7 @@ const cors = require('cors')
 const app = express() //the express function creates an express application stored in the app variable
 
 app.use(cors())
+app.use(express.static('dist'))
 
 let notes = [
     {
